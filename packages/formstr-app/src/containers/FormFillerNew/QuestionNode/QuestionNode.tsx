@@ -32,7 +32,7 @@ export const QuestionNode: React.FC<QuestionProps> = ({
   return (
     <Card type="inner" className="filler-question">
       {required && <span style={{ color: "#ea8dea" }}>* &nbsp;</span>}
-      <div className="question-text" style={{ color: fontColor || "inherit" }}>
+      <div className="question-text">
         <Markdown>{label}</Markdown>
       </div>
       {fieldConfig.renderElement === AnswerTypes.label ? null : <Divider />}
