@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/nostr-forms/static/css/main.5706071b.css",
-    "main.js": "/nostr-forms/static/js/main.a7785720.js",
+    "main.js": "/nostr-forms/static/js/main.f3a9add9.js",
     "static/js/596.56d87ef6.chunk.js": "/nostr-forms/static/js/596.56d87ef6.chunk.js",
     "static/js/860.cd389d2b.chunk.js": "/nostr-forms/static/js/860.cd389d2b.chunk.js",
     "static/js/603.66e75619.chunk.js": "/nostr-forms/static/js/603.66e75619.chunk.js",
@@ -18,6 +18,6 @@
   },
   "entrypoints": [
     "static/css/main.5706071b.css",
-    "static/js/main.a7785720.js"
+    "static/js/main.f3a9add9.js"
   ]
 }
