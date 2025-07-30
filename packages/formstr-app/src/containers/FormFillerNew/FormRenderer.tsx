@@ -77,7 +77,18 @@ export const FormRenderer: React.FC<FormRendererProps> = ({
           {!hideDescription && settings?.description && (
             <div className="form-description">
               <Text>
-                <Markdown>{settings.description}</Markdown>
+                <Markdown components={{
+                  p: ({children}) => (
+                    <p style={{
+                      color: fontColor || settings?.fontColor || "#000000",
+                      fontSize: getFontSizeInPx(fontSize || settings?.fontSize)
+                    }}>
+                      {children}
+                    </p>
+                  )
+                }}>
+                  {settings.description}
+                </Markdown>
               </Text>
             </div>
           )}
