@@ -7,8 +7,11 @@ import { TemplateProvider } from "./provider/TemplateProvider";
 import { HandleLegacyRoutes } from "./components/HandleLegacyRoutes";
 
 function App() {
+  // Get the base URL from the environment or use default for GitHub Pages
+  const basename = process.env.NODE_ENV === 'production' ? '/nostr-forms' : '/';
+  
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
         <HandleLegacyRoutes>
       <div className="App">
         <ApplicationProvider>
