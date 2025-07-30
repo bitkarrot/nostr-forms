@@ -2,7 +2,7 @@
   "name": "@formstr/web-app",
   "version": "0.1.0",
   "license": "unlicense",
-  "homepage": "https://bitkarrot.github.io/nostr-forms",
+  "homepage": ".",
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
     "@babel/core": "^7.16.0",

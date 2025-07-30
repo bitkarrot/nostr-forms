@@ -2,6 +2,7 @@ import { constructFormUrl as constructFormUrlSDK } from "@formstr/sdk";
 import { DEVICE_TYPE, DEVICE_WIDTH } from "../constants/index";
 import { getItem, LOCAL_STORAGE_KEYS, setItem } from "./localStorage";
 import { nip19 } from "nostr-tools";
+import { BASE_URL, constructUrl } from "../config/urls";
 
 export function makeTag(length: number) {
   let result = "";
@@ -63,14 +64,11 @@ export function constructFormUrl(
   publicKey: string,
   formIdentifier: string | null = null,
 ) {
-  let hostname = window.location.host;
-  if (hostname.includes("abhay-raizada")) {
-    hostname += "/nostr-forms";
-  }
-  if (!formIdentifier) `http://${hostname}/fill/${publicKey}/`;
+  // Use the environment variable based configuration
+  if (!formIdentifier) return constructUrl(`/fill/${publicKey}/`);
   return !formIdentifier
-    ? `http://${hostname}/fill/${publicKey}`
-    : `http://${hostname}/f/${publicKey}/${formIdentifier}`;
+    ? constructUrl(`/fill/${publicKey}`)
+    : constructUrl(`/f/${publicKey}/${formIdentifier}`);
 }
 
 export function constructDraftUrl(
@@ -81,14 +79,12 @@ export function constructDraftUrl(
   }
   let draftHash = window.btoa(encodeURIComponent(JSON.stringify(draft)));
   draftHash = window.encodeURIComponent(draftHash);
-  const hostname = window.location.host;
-
-  return `http://${hostname}/drafts/${draftHash}`;
+  
+  return constructUrl(`/drafts/${draftHash}`);
 }
 
 export function constructResponseUrl(privateKey: string | null) {
-  const hostname = window.location.host;
-  return `http://${hostname}/r/${privateKey}/responses`;
+  return constructUrl(`/r/${privateKey}/responses`);
 }
 
 export function copyToClipBoard(str: string) {

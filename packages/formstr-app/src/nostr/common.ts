@@ -182,7 +182,9 @@ export const sendNotification = async (
       getDisplayAnswer(response[2], question) +
       "\n";
   });
-  message += "Visit https://formstr.app to view the responses.";
+  // Use the environment variable for the base URL
+  const baseUrl = process.env.REACT_APP_BASE_URL || window.location.origin;
+  message += `Visit ${baseUrl} to view the responses.`;
   const newSk = generateSecretKey();
   const newPk = getPublicKey(newSk);
   const pool = new SimplePool();

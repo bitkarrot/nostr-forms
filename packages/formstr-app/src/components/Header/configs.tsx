@@ -7,6 +7,7 @@ import {
   MailOutlined,
 } from "@ant-design/icons";
 import { ROUTES } from "../../constants/routes";
+import { CONTACT_FORM_URL } from "../../config/urls";
 
 export const HEADER_MENU_KEYS = {
   PUBLIC_FORMS: "PUBLIC_FORMS",
@@ -26,7 +27,7 @@ export const HEADER_MENU = [
     key: HEADER_MENU_KEYS.CONTACT_US,
     label: (
       <a
-        href="https://formstr.app/f/naddr1qvzqqqr4mqpzphj4jjc6qkaaswuz6wu3kzyvhhdu5e68rdfymj2dtmk5eajwvx2mqy88wumn8ghj7mn0wvhxcmmv9uqqvj64ddmxyjgexza45?viewKey=4425edf8b0c0ab84f47718452c6dd0fcfb6df2ec73ad868b31eefe0f18abc8f8"
+        href={CONTACT_FORM_URL}
         target="_blank"
         rel="noopener noreferrer"
         style={{ textDecoration: "none" }}
