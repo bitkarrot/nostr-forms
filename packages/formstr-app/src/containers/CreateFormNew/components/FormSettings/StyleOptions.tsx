@@ -45,7 +45,7 @@ function StyleOptions({ backgroundColor, fontColor, fontSize }: StyleOptionsProp
       />
       
       <div className="property-setting">
-        <Text className="property-name">Font Color</Text>
+        <Text className="property-name">Description Font Color</Text>
       </div>
       <Input
         type="color"
