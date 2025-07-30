@@ -5,6 +5,7 @@ import ReactMarkdown from "react-markdown";
 import { CaretRightOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import { useToken } from "antd/es/theme/internal";
+import { constructUrl } from "../../config/urls";
 
 const { Panel } = Collapse;
 
@@ -101,7 +102,9 @@ const FAQModal: React.FC<FAQModalProps> = ({ visible, onClose }) => {
       setError(null);
 
       try {
-        const response = await fetch("/docs/faq.md");
+        // Use constructUrl to handle base path correctly in both dev and prod
+        const faqUrl = constructUrl("/docs/faq.md");
+        const response = await fetch(faqUrl);
         if (!response.ok) {
           throw new Error(`Failed to fetch FAQ content: ${response.status}`);
         }
