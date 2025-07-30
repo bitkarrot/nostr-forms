@@ -15,6 +15,7 @@ import { bytesToHex } from "@noble/hashes/utils";
 import { normalizeURL } from "nostr-tools/utils";
 import { Field, Response, Tag } from "./types";
 import { IFormSettings } from "../containers/CreateFormNew/components/FormSettings/types";
+import { BASE_URL } from '../config/urls';
 
 declare global {
   // TODO: make this better
@@ -182,9 +183,8 @@ export const sendNotification = async (
       getDisplayAnswer(response[2], question) +
       "\n";
   });
-  // Use the environment variable for the base URL
-  const baseUrl = process.env.REACT_APP_BASE_URL || window.location.origin;
-  message += `Visit ${baseUrl} to view the responses.`;
+  // Use the BASE_URL from our centralized config (imported at the top of the file)
+  message += `Visit ${BASE_URL} to view the responses.`;
   const newSk = generateSecretKey();
   const newPk = getPublicKey(newSk);
   const pool = new SimplePool();

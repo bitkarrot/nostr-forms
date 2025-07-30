@@ -1,34 +1,37 @@
 /**
  * URL configuration for the application
- * Uses environment variables for different deployment environments
+ * Automatically detects environment and adjusts paths accordingly
  */
 
+// Get the public URL from the environment
+const publicUrl = process.env.PUBLIC_URL || '';
+
 // Determine if we're in development mode
-// Use either NODE_ENV or our custom environment variable
 const isDevelopment = process.env.NODE_ENV === 'development' || process.env.REACT_APP_IS_LOCAL === 'true';
 
-// Base URL from environment variable with fallback
-export const BASE_URL = isDevelopment ? '' : (process.env.REACT_APP_BASE_URL || '');
-
-// Base path for routes - empty for local development, '/nostr-forms' for GitHub Pages
-export const BASE_PATH = isDevelopment ? '' : '/nostr-forms';
-
-// Helper function to construct URLs with the base URL and path
+/**
+ * Helper function to construct URLs correctly for both development and production
+ * In development: Uses relative paths
+ * In production: Uses paths relative to the homepage (PUBLIC_URL)
+ */
 export const constructUrl = (path: string): string => {
-  // If running locally, use relative paths without the /nostr-forms prefix
+  // Make sure path starts with a slash
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  
+  // In development, use relative paths
   if (isDevelopment) {
-    return path;
+    return normalizedPath;
   }
   
-  // Otherwise use the base URL with the path
-  return `${BASE_URL}${path}`;
+  // In production, prepend the public URL
+  return `${publicUrl}${normalizedPath}`;
 };
 
-// Contact form URL - handle differently for development vs production
+// Contact form URL
 const contactFormPath = '/f/naddr1qvzqqqr4mqpzphj4jjc6qkaaswuz6wu3kzyvhhdu5e68rdfymj2dtmk5eajwvx2mqy88wumn8ghj7mn0wvhxcmmv9uqqvj64ddmxyjgexza45?viewKey=4425edf8b0c0ab84f47718452c6dd0fcfb6df2ec73ad868b31eefe0f18abc8f8';
-export const CONTACT_FORM_URL = isDevelopment 
-  ? contactFormPath 
-  : `${BASE_URL}${contactFormPath}`;
+export const CONTACT_FORM_URL = constructUrl(contactFormPath);
 
-// Response view URL
-export const RESPONSES_BASE_URL = BASE_URL;
+// Base URL for absolute URLs (like in notifications)
+export const BASE_URL = isDevelopment 
+  ? window.location.origin 
+  : process.env.REACT_APP_BASE_URL || 'https://bitkarrot.github.io/nostr-forms';
