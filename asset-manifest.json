@@ -12,8 +12,8 @@
     "static/media/no-forms.svg": "/nostr-forms/static/media/no-forms.c01df446c53b13932c530cfb86c6a090.svg",
     "static/media/Geyser.svg": "/nostr-forms/static/media/Geyser.26fc68078f06573b067f434753c59bd6.svg",
     "static/media/Frame.svg": "/nostr-forms/static/media/Frame.cc9e6a2f07ac6c5bab6872ab3eceb6e5.svg",
-    "static/media/success.svg": "/nostr-forms/static/media/success.aa137093d09500f9b71508984a84f03a.svg",
     "index.html": "/nostr-forms/index.html",
+    "static/media/success.svg": "/nostr-forms/static/media/success.aa137093d09500f9b71508984a84f03a.svg",
     "static/media/asterisk.svg": "/nostr-forms/static/media/asterisk.123de66ecd7b2d072bbe3175046a9562.svg"
   },
   "entrypoints": [
