@@ -9,6 +9,7 @@ import { Reorder, motion, useDragControls, DragControls } from "framer-motion";
 import { Field } from "../../../../nostr/types";
 import { isMobile } from "../../../../utils/utility";
 import AIFormGeneratorModal from "../AIFormGeneratorModal";
+import Markdown from "react-markdown";
 
 const { Text } = Typography;
 
@@ -173,6 +174,26 @@ export const QuestionsList = () => {
               autoSize
               placeholder="Add a form description (optional, supports Markdown)"
             />
+            {formSettings.description && (
+              <div className="description-preview" style={{ marginTop: '10px', padding: '5px' }}>
+                <Text strong>Preview:</Text>
+                <div>
+                  <Markdown components={{
+                    p: ({children}) => (
+                      <p style={{
+                        color: formSettings.fontColor || "#000000",
+                        fontSize: formSettings.fontSize === "small" ? "14px" : 
+                                formSettings.fontSize === "large" ? "24px" : "20px"
+                      }}>
+                        {children}
+                      </p>
+                    )
+                  }}>
+                    {formSettings.description}
+                  </Markdown>
+                </div>
+              </div>
+            )}
           </div>
         </DescriptionStyle>
       </div>

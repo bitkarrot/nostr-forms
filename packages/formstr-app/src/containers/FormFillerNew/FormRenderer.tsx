@@ -46,10 +46,10 @@ export const FormRenderer: React.FC<FormRendererProps> = ({
       case "small":
         return "14px";
       case "large":
-        return "18px";
+        return "24px";
       case "medium":
       default:
-        return "16px";
+        return "20px";
     }
   };
 
