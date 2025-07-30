@@ -11,6 +11,7 @@ interface QuestionProps {
   options: Option[]
   inputHandler: (questionId: string, answer: string, message?: string) => void;
   required: boolean;
+  fontColor?: string;
 }
 
 export const QuestionNode: React.FC<QuestionProps> = ({
@@ -20,6 +21,7 @@ export const QuestionNode: React.FC<QuestionProps> = ({
   options,
   inputHandler,
   required,
+  fontColor,
 }) => {
   const answerHandler = (questionId: string) => {
     return (answer: string, message?: string) => {
@@ -30,7 +32,7 @@ export const QuestionNode: React.FC<QuestionProps> = ({
   return (
     <Card type="inner" className="filler-question">
       {required && <span style={{ color: "#ea8dea" }}>* &nbsp;</span>}
-      <div className="question-text">
+      <div className="question-text" style={{ color: fontColor || "inherit" }}>
         <Markdown>{label}</Markdown>
       </div>
       {fieldConfig.renderElement === AnswerTypes.label ? null : <Divider />}

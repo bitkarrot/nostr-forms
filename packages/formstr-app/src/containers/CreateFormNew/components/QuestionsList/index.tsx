@@ -146,12 +146,21 @@ export const QuestionsList = () => {
     setIsLeftMenuOpen(true);
   };
 
+  // Apply styling from formSettings
+  const formStyle = {
+    position: "relative" as const,
+    backgroundColor: formSettings.backgroundColor || "#dedede",
+    color: formSettings.fontColor || "#000000",
+    fontSize: formSettings.fontSize === "small" ? "14px" : 
+              formSettings.fontSize === "large" ? "18px" : "16px"
+  };
+
   return (
     <StyleWrapper
       className="main-content"
       onClick={() => setQuestionIdInFocus()}
       ref={containerRef}
-      style={{ position: "relative" }}
+      style={formStyle}
     >
       <div>
         <FormTitle className="form-title" />

@@ -7,6 +7,7 @@ import FormIdentifier from "./FormIdentifier";
 import { Notifications } from "./Notifications";
 import { isMobile } from "../../../../utils/utility";
 import RelayManagerModal from './RelayManagerModal';
+import StyleOptions from './StyleOptions';
 
 const { Text } = Typography;
 
@@ -37,6 +38,13 @@ function FormSettings() {
       </div>
       <div className="form-setting">
         <TitleImage titleImageUrl={formSettings.titleImageUrl} />
+      </div>
+      <div className="form-setting">
+        <StyleOptions 
+          backgroundColor={formSettings.backgroundColor}
+          fontColor={formSettings.fontColor}
+          fontSize={formSettings.fontSize}
+        />
       </div>
       <Divider className="divider" />
       <div className="form-setting">

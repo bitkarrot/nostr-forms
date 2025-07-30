@@ -18,6 +18,7 @@ import { useProfileContext } from "../../../../hooks/useProfileContext";
 import { SimplePool, UnsignedEvent } from "nostr-tools";
 import { getDefaultRelays } from "@formstr/sdk";
 import { KINDS, Tag } from "../../../../nostr/types";
+import useFormBuilderContext from "../../hooks/useFormBuilderContext";
 
 const { Text } = Typography;
 interface FormDetailsProps {
@@ -182,14 +183,36 @@ export const FormDetails: React.FC<FormDetailsProps> = ({
   }, [userPub]);
 
   type TabKeyType = "share" | "embed";
-  type OptionType = "hideTitleImage" | "hideDescription";
+  type CheckboxOptionType = "hideTitleImage" | "hideDescription";
+  type StyleOptionType = "backgroundColor" | "fontColor" | "fontSize";
+  type OptionType = CheckboxOptionType | StyleOptionType;
   const [activeTab, setActiveTab] = useState<TabKeyType>("share");
-  const [embedOptions, setEmbedOptions] = useState<{
-    hideTitleImage?: boolean;
-    hideDescription?: boolean;
-  }>({});
+  const { formSettings } = useFormBuilderContext();
+  const [embedOptions, setEmbedOptions] = useState<{ 
+    hideTitleImage: boolean;
+    hideDescription: boolean;
+    backgroundColor: string;
+    fontColor: string;
+    fontSize: string;
+  }>({
+    hideTitleImage: false,
+    hideDescription: false,
+    backgroundColor: formSettings.backgroundColor || "#ffffff",
+    fontColor: formSettings.fontColor || "#000000",
+    fontSize: formSettings.fontSize || "medium",
+  });
 
-  const handleCheckboxChange = (option: OptionType) => {
+  // Update embedOptions when formSettings change
+  useEffect(() => {
+    setEmbedOptions(prevOptions => ({
+      ...prevOptions,
+      backgroundColor: formSettings.backgroundColor || "#ffffff",
+      fontColor: formSettings.fontColor || "#000000",
+      fontSize: formSettings.fontSize || "medium",
+    }));
+  }, [formSettings]);
+
+  const handleCheckboxChange = (option: CheckboxOptionType) => {
     setEmbedOptions({
       ...embedOptions,
       [option]: !embedOptions[option],

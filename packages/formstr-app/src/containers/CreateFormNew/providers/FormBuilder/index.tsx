@@ -70,6 +70,9 @@ const InitialFormSettings: IFormSettings = {
   formId: makeTag(6),
   encryptForm: true,
   viewKeyInUrl: true,
+  backgroundColor: "#ffffff",
+  fontColor: "#000000",
+  fontSize: "medium",
 };
 
 export default function FormBuilderProvider({

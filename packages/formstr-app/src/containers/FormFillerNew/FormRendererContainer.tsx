@@ -8,6 +8,7 @@ import { FormRenderer } from "./FormRenderer";
 import { useEffect, useState } from "react";
 import { getResponseRelays } from "../../utils/ResponseUtils";
 import { IFormSettings } from "../CreateFormNew/components/FormSettings/types";
+import { useLocation } from "react-router-dom";
 
 const { Text } = Typography;
 
@@ -16,7 +17,10 @@ interface FormRendererContainerProps {
   onSubmitClick: (responses: Response[], formTemplate: Tag[]) => void;
   viewKey: string | null;
   hideTitleImage?:  boolean;
-  hideDescription?: boolean
+  hideDescription?: boolean;
+  backgroundColor?: string;
+  fontColor?: string;
+  fontSize?: string;
 }
 
 export const FormRendererContainer: React.FC<FormRendererContainerProps> = ({
@@ -24,13 +28,23 @@ export const FormRendererContainer: React.FC<FormRendererContainerProps> = ({
   onSubmitClick,
   viewKey,
   hideDescription,
-  hideTitleImage
+  hideTitleImage,
+  backgroundColor: propBackgroundColor,
+  fontColor: propFontColor,
+  fontSize: propFontSize
 }) => {
   const { pubkey: userPubKey, requestPubkey } = useProfileContext();
   const [form] = Form.useForm();
   const { Text } = Typography;
   const [formTemplate, setFormTemplate] = useState<Tag[]>();
   const [settings, setSettings] = useState<IFormSettings>();
+  const location = useLocation();
+  
+  // Extract styling parameters from URL query parameters
+  const searchParams = new URLSearchParams(location.search);
+  const backgroundColor = propBackgroundColor || searchParams.get('backgroundColor') || undefined;
+  const fontColor = propFontColor || searchParams.get('fontColor') || undefined;
+  const fontSize = propFontSize || searchParams.get('fontSize') || undefined;
   useEffect(() => {
     const initialize = async () => {
       if (formEvent.content === "") {
@@ -123,7 +137,10 @@ export const FormRendererContainer: React.FC<FormRendererContainerProps> = ({
       onInput={handleInput}
       footer={footer}
       hideTitleImage={hideTitleImage}         
-      hideDescription={hideDescription}       
+      hideDescription={hideDescription}
+      backgroundColor={backgroundColor}
+      fontColor={fontColor}
+      fontSize={fontSize}       
     />
   );
 };

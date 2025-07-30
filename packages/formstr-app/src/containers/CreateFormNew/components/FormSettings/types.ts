@@ -8,4 +8,7 @@ export interface IFormSettings {
   formId?: string;
   encryptForm?: boolean
   viewKeyInUrl?: boolean
+  backgroundColor?: string;
+  fontColor?: string;
+  fontSize?: string;
 }

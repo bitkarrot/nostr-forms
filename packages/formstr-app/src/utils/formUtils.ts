@@ -66,7 +66,7 @@ export const fetchKeys = async (
 export function constructEmbeddedUrl(
   pubKey: string,
   formId: string,
-  options: { [key: string]: boolean } = {},
+  options: { [key: string]: boolean | string } = {},
   relay: string,
   viewKey?: string,
 ) {
@@ -79,6 +79,17 @@ export function constructEmbeddedUrl(
   }
   if (options.hideDescription) {
     params.append("hideDescription", "true");
+  }
+  
+  // Add styling parameters if they exist
+  if (options.backgroundColor) {
+    params.append("backgroundColor", options.backgroundColor as string);
+  }
+  if (options.fontColor) {
+    params.append("fontColor", options.fontColor as string);
+  }
+  if (options.fontSize) {
+    params.append("fontSize", options.fontSize as string);
   }
   return params.toString()
     ? `${embeddedUrl}?${params.toString()}`
