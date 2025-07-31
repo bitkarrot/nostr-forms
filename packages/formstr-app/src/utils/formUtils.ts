@@ -8,6 +8,7 @@ import { sha256 } from "@noble/hashes/sha256";
 import { naddrUrl } from "./utility";
 import { AddressPointer } from "nostr-tools/nip19";
 import { fetchFormTemplate } from "../nostr/fetchFormTemplate";
+import { constructUrl } from "../config/urls";
 
 export const createFormSpecFromTemplate = (
   template: FormTemplate,
@@ -144,8 +145,8 @@ export const constructFormUrl = (
   viewKey?: string,
 ) => {
   const naddr = naddrUrl(pubkey, formId, [relay], viewKey);
-  const baseUrl = `${window.location.origin}${naddr}`;
-  return baseUrl;
+  // Use constructUrl to ensure proper base path in production
+  return `${window.location.origin}${constructUrl(naddr)}`;
 };
 
 export const editPath = (
@@ -180,9 +181,9 @@ export const constructNewResponseUrl = (
   relay?: string,
   viewKey?: string,
 ) => {
-  const baseUrl = `${window.location.origin}`;
   const responsePart = responsePath(secretKey, formId, relay, viewKey);
-  return `${baseUrl}${responsePart}`;
+  // Use constructUrl to ensure proper base path in production
+  return `${window.location.origin}${constructUrl(responsePart)}`;
 };
 
 export const getFormData = async (naddr: string, poolRef: SimplePool) => {
